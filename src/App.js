@@ -3,32 +3,38 @@ import React from 'react';
 // import { render } from 'react-dom';
 
 // todo
-class Timer extends React.Component {
+class CountdownClock extends React.Component {
 
   // constants
 
 
   // todo
   constructor(props) {
-    // todo - am i using props?
     super(props)
+    this.initialMinutesCounter = props.minutes
+    this.initialSecondsCounter = props.seconds
+    this.myInterval = null
+
     this.state = {
       minutes: props.minutes,
-      seconds: props.seconds
+      seconds: props.seconds,
+      isPaused: true
     }
-
-    // just declaring here
-    this.myInterval = null
   }
 
   // This method will be invoked every time
   // https://betterprogramming.pub/building-a-simple-countdown-timer-with-react-4ca32763dda7
   componentDidMount() {
-    //
 
     this.myInterval = setInterval( () => {
       const { seconds, minutes } = this.state
-      if (seconds > 0) {
+
+      // comment about it
+      if (this.state.isPaused) {
+         return
+      }
+
+      if (seconds > 0 && !this.state.isPaused) {
           this.setState(({seconds}) => ({
             seconds: seconds - 1
           }))
@@ -45,6 +51,19 @@ class Timer extends React.Component {
     }, 1000)
   }
 
+  //
+  startOrPauseTimer(){
+    this.state.isPaused ? this.setState({isPaused:false}) : this.setState({isPaused:true})
+  }
+
+  resetTimer() {
+    this.setState({
+      minutes: this.initialMinutesCounter,
+      seconds: this.initialSecondsCounter,
+      isPaused:true
+    })
+  }
+
   // todo
   render() {
     // getting data from the state
@@ -54,20 +73,21 @@ class Timer extends React.Component {
       <div>
         {minutes === 0 && seconds === 0 ?
         <h1> Time is up </h1>:
-
-        // insert below what is the set and what is the round
         <h1> Time Remaining for X is { minutes }:{ seconds < 10 ? `0${ seconds }`: seconds} </h1>
         }
+        <div className='button-div'>
+        <button onClick={()=>{this.startOrPauseTimer()}}>Start \ Pause</button>
+        <button onClick={()=>{this.resetTimer()}}>Reset</button>
+        </div>
       </div>
     )
   }
 }
 
-
+//
 class PomodotoTimer extends React.Component {
 
   constructor(props) {
-    // todo - am i using props?
     super(props)
     this.state = {
 
@@ -78,10 +98,14 @@ class PomodotoTimer extends React.Component {
   render() {
     return (
       <div>
-        <Timer
+      <h3> Welcome to PomodotoTimer </h3>
+
+        <h4>
+        <CountdownClock
         minutes={0}
         seconds={10}
         />
+        </h4>
       </div>
     )
   }
