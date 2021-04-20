@@ -1,6 +1,6 @@
 import './App.css';
 import React from 'react';
-import { render } from 'react-dom';
+// import { render } from 'react-dom';
 
 // todo
 class Timer extends React.Component {
@@ -13,8 +13,8 @@ class Timer extends React.Component {
     // todo - am i using props?
     super(props)
     this.state = {
-      minutes: 0,
-      seconds: 2
+      minutes: props.minutes,
+      seconds: props.seconds
     }
 
     // just declaring here
@@ -63,4 +63,30 @@ class Timer extends React.Component {
   }
 }
 
-export default Timer;
+
+class PomodotoTimer extends React.Component {
+
+  constructor(props) {
+    // todo - am i using props?
+    super(props)
+    this.state = {
+
+    }
+  }
+
+  // todo
+  render() {
+    return (
+      <div>
+        <Timer
+        minutes={0}
+        seconds={10}
+        />
+      </div>
+    )
+  }
+}
+
+
+
+export default PomodotoTimer;
