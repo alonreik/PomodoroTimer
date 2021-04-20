@@ -1,27 +1,53 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import { render } from 'react-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          A paragraph.
-          <br/>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+// todo
+class Timer extends React.Component {
+
+  // todo
+  constructor(props) {
+    super()
+    this.state = {
+      minutes: 3,
+      seconds: 2
+    }
+  }
+
+  // todo
+  componentDidMount() {
+    this.myInterval = setInterval( () => {
+      const { seconds, minutes } = this.state
+
+      if (seconds > 0) {
+          this.setState(({seconds}) => ({
+            seconds: seconds - 1
+          }))
+      } else if (seconds == 0) {
+          if (minutes == 0) {
+            //todo
+          } else { // minutes > 0
+            this.setState(({minutes}) => ({
+              minutes: minutes - 1,
+              seconds: 59
+              }))
+            }
+          }
+        }, 1000)
+      }
+
+  // todo
+  render() {
+    // getting data from the state
+    const { minutes, seconds } = this.state
+    // displaying the data (notice the usage of string literals).
+    return (
+      <div>
+      <h1>Time Remaining for X is { minutes }:{ seconds < 10 ? `0${ seconds }`: seconds} </h1>
+      // { minutes }:{ seconds < 10 ? `0${ seconds }` : seconds }
+      </div>
+    )
+  }
 }
 
-export default App;
+export default Timer;
