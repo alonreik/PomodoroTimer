@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import PomodoroTimer from './PomodoroTimer';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <PomodoroTimer />
   </React.StrictMode>,
   document.getElementById('root')
 );
