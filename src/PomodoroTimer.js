@@ -21,6 +21,8 @@ class PomodoroTimer extends React.Component {
 
     // Initialize state
     this.state = {
+      // When isInitialSetup is true, the user is able to select custom times
+      // for the timers. Otherwise, the 'input getters' are hidden.
       isInitialSetup:true,
       isPomodoro: true,
       currentMinutes: 0,
